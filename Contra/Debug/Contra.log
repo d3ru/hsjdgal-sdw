@@ -1,0 +1,5 @@
+﻿  Zombie.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\tan\documents\visual studio 2013\projects\contra\contra\zombie.cpp(34): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\tan\documents\visual studio 2013\projects\contra\contra\zombie.cpp(40): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+  Contra.vcxproj -> c:\users\tan\documents\visual studio 2013\Projects\Contra\Debug\Contra.exe
