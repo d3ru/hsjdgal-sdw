@@ -16,6 +16,7 @@
     <ClCompile Include="BallFactory.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletFactory.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -37,6 +38,7 @@
     <ClInclude Include="BallFactory.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletFactory.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="Game.h" />

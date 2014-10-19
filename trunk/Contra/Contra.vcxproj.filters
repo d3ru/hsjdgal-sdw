@@ -31,6 +31,9 @@
     <Filter Include="FrameWork\Utils">
       <UniqueIdentifier>{5674d4ed-9f2c-4f0d-907e-b274122d867f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameWork\Camera">
+      <UniqueIdentifier>{e8855d82-082c-44e7-bf04-3bbc98aff512}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -90,6 +93,9 @@
     <ClCompile Include="ZombieFactory.cpp">
       <Filter>Factory</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>FrameWork\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -148,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="ZombieFactory.h">
       <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>FrameWork\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
