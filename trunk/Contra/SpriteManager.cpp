@@ -23,12 +23,16 @@ SpriteManager::~SpriteManager()
 
 void SpriteManager::init(LPD3DXSPRITE spriteHandle)
 {
-	_Sprite = new Sprite(spriteHandle);
+	sprite = new Sprite(spriteHandle);
+
+	camera = new Camera();
 }
 
 void SpriteManager::draw(Texture* texture, RECT *RectRS, D3DXVECTOR3 pos, D3DCOLOR transcolor)
 {
-	_Sprite->draw(texture, RectRS, pos, transcolor, true);
+	D3DXVECTOR3 posDraw = camera->getPointTransform(pos.x, pos.y);
+
+	sprite->draw(texture, RectRS, posDraw, transcolor, true);
 }
 
 void SpriteManager::drawObj(ObjectGame* gameObject, D3DCOLOR transcolor)
@@ -53,11 +57,18 @@ void SpriteManager::drawObj(ObjectGame* gameObject, D3DCOLOR transcolor)
 
 		gameObject->setContainSize(texture->getContainSize().width, texture->getContainSize().height);
 	}
+
+	D3DXVECTOR3 posDraw(camera->getPointTransform(position.x, position.y));
 		
 	if (!gameObject->_isFlipX)
-		_Sprite->draw(texture, rectRS, position, transcolor, true);
+		sprite->draw(texture, rectRS, posDraw, transcolor, true);
 	else
 	{
-		_Sprite->drawFlipX(texture, rectRS, position, transcolor, true);
+		sprite->drawFlipX(texture, rectRS, posDraw, transcolor, true);
 	}
+}
+
+void SpriteManager::updateCamera(float posRambo, float dt)
+{
+	camera->update(posRambo, dt);
 }

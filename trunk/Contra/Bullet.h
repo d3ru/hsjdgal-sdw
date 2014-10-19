@@ -34,6 +34,8 @@ private :
 	float vY;
 
 	int dir_X;
+
+	float distaceBullet;
 };
 
 #endif
