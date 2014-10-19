@@ -20,7 +20,8 @@ enum class ZombieStatus
 enum class AnimationStatus
 {
 	isInit,
-	isNormal,
+	isFire,
+	isRotate,
 	isRun,
 	isFireUp,
 	isFireDown,
@@ -54,10 +55,11 @@ public:
 
 private:
 
+	bool isJump;
 	
 	void updateRECT();
 
-
+	bool isOnFoot;
 
 	
 	void addBullet();

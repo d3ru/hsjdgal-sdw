@@ -21,27 +21,31 @@ Bullet::Bullet(std::vector<std::string> arr, Zombie* zombie)
 
 	this->ID = atoi(arr.at(1).c_str());
 
-	this->vX = 130;
+	this->vX = 290;
 
-	this->vY = -130;
+	this->vY = 0;
 
 	
 
 	bulletStatus = BulletStatus::isNormal;
 
+	
+
 	if (!zombie->_isFlipX)
 	{
 		dir_X = 1;
-		this->setPosition(zombie->getPositionX() + zombie->getContainSize().width / 2, zombie->getPositionY() - 20);
+		this->setPosition(zombie->getPositionX() + zombie->getContainSize().width / 2 + this->getContainSize().width / 2, zombie->getPositionY() - 13);
+		distaceBullet = zombie->getPositionX() + 400;
 		if (zombie->isMove)
 			vX += zombie->vX;
 	}
 	else if (zombie->_isFlipX)
 	{
 		dir_X = -1;
-		this->setPosition(zombie->getPositionX() - zombie->getContainSize().width / 2, zombie->getPositionY() - 20);
+		this->setPosition(zombie->getPositionX() - zombie->getContainSize().width / 2, zombie->getPositionY() - 13);
+		distaceBullet = zombie->getPositionX() - 400;
 		if (zombie->isMove)
-			vX -= zombie->vX;
+			vX += zombie->vX;
 	}
 
 	
@@ -49,7 +53,11 @@ Bullet::Bullet(std::vector<std::string> arr, Zombie* zombie)
 
 void Bullet::update(float dt)
 {
-	if (bulletStatus == BulletStatus::isNormal && this->getPositionY() <= 300.0)
+	if (bulletStatus == BulletStatus::isNormal && !Zombie::getInstance()->_isFlipX && this->getPositionX() >= this->distaceBullet)
+	{
+		bulletStatus = BulletStatus::isHide;
+	}
+	else if (bulletStatus == BulletStatus::isNormal && Zombie::getInstance()->_isFlipX && this->getPositionX() <= this->distaceBullet)
 	{
 		bulletStatus = BulletStatus::isHide;
 	}

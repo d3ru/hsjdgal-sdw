@@ -27,7 +27,8 @@ private:
 	std::vector<Ball*>* listBall;
 
 	Ball* ball;
-
+	
+	RECT screen;
 
 	Zombie* zombie;
 

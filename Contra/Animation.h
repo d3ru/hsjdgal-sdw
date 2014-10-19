@@ -8,37 +8,23 @@ class Animation
 {
 public:
 	
-	float _elapseTimeSwitchFrame;
-
 	float _beforeTimeOld;
+	
+	void setAnimation(int , int, int, float frameTime = 0.1);
 
-	int _currentFrame;
+	RECT* cropRect(float dt);
 
-	int _increase;
+	std::vector<RECT*> listRect;
 
-	int _totalFrames;
-
-	int _columm;
-
-	RECT* updateRectRS(int Width, int Height);
-
-	Animation();
-
-	Animation(int curFrame, int, int totalFrames, int coloumn, float elapseTimeSwitchFrame);
-
-    void animated(float dt);
+private:
 
 	int index;
 
 	int lastFrame;
 
-	int firstFrame;
+	int firstFrame;	
 
-	std::vector<RECT*> listRect;
-	
-
-	RECT* cropRect(float dt);
-	
+	float frameRateTime;
 };
 
 #endif

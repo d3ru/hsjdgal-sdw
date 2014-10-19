@@ -8,6 +8,7 @@
 #include"Texture.h"
 #include"Sprite.h"
 #include"ObjectGame.h"
+#include"Camera.h"
 
 class SpriteManager
 {
@@ -15,13 +16,15 @@ public:
 	SpriteManager();
 	~SpriteManager();
 
-	Sprite* _Sprite;
+	Sprite* sprite;
+
+	Camera* camera;
 
 	static SpriteManager* createInstance();
 	void init(LPD3DXSPRITE spriteHandle);
 	void draw(Texture* texture, RECT *RectRS, D3DXVECTOR3 pos, D3DCOLOR transcolor = 0xFFFFFFFF);
-//	void drawObj(ObjectGame* objectGame, D3DCOLOR transcolor);
 	void drawObj(ObjectGame*, D3DCOLOR transcolor = 0xFFFFFFFF);
+	void updateCamera(float posRambo, float dt);
 };
 
 #endif

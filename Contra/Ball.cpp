@@ -30,6 +30,7 @@ Ball::Ball(std::vector<std::string> arr)
 
 	this->_position.x = 400;
 	this->_position.y = 300;
+	
 
 
 	vX = (((rand() % 80) + 20) * (rand() % 2 == 0 ? 1 : -1)) * 2.0;
@@ -72,16 +73,16 @@ void Ball::update(float dt)
 	processInput();
 	if (this->getPositionX() >= 800 - this->getContainSize().width / 2 || this->getPositionX() <= this->getContainSize().width / 2)
 		vX = -vX;
-	if (this->getPositionY() >= 600  || this->getPositionY() <= this->getContainSize().height)
+	if (this->getPositionY() >= 600  - this->getContainSize().height || this->getPositionY() <=0)
 		vY = -vY;
 	if (this->getPositionX() >= 800 - this->getContainSize().width / 2)
 		this->setPositionX(800 - this->getContainSize().width / 2);
 	if (this->getPositionX() <=  this->getContainSize().width / 2)
 		this->setPositionX(this->getContainSize().width / 2);
-	if (this->getPositionY() >= 600)
-		this->setPositionY(600);
-	if (this->getPositionY() <= this->getContainSize().height)
-		this->setPositionY(this->getContainSize().height);
+	if (this->getPositionY() >= 600 - this->getContainSize().height)
+		this->setPositionY(600 - this->getContainSize().height);
+	if (this->getPositionY() <= 0)
+		this->setPositionY(0);
 	
 	this->setPosition(this->getPositionX() + vX*dt, this->getPositionY() + vY*dt);
 }

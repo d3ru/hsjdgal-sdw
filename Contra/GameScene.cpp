@@ -33,8 +33,16 @@ void GameScene::gameInit()
 	
 	
 	listBall = BallFactory::getInstance()->createListBall();
-	//pall = PallFactory::getInstance()->create();
+	
+	RECT _rect;
+	_rect.left = 0;
+	_rect.right = 1200;
+	_rect.top = 600;
+	_rect.bottom = 0;
 
+	SpriteManager::createInstance()->camera->setBound(_rect);
+
+	screen = SpriteManager::createInstance()->camera->getScreen();
 
 	ball = BallFactory::getInstance()->createObj();
 
@@ -86,6 +94,8 @@ void GameScene::gameUpdate(float dt)
 	//pall->update();
 
 	zombie->update(dt);
+
+	SpriteManager::createInstance()->updateCamera(Zombie::getInstance()->getPositionX(), dt);
 
 	if (listBullet)
 	{
