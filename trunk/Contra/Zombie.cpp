@@ -5,10 +5,10 @@
 
 static Zombie* instance = nullptr;
 
-Zombie* Zombie::createInstance(std::vector<std::string> arr)
+Zombie* Zombie::createInstance(GameNode gameNode)
 {
 	if (instance == nullptr)
-		instance = new Zombie(arr);
+		instance = new Zombie(gameNode);
 	return instance;
 }
 
@@ -23,18 +23,18 @@ Zombie::Zombie()
 {
 }
 
-Zombie::Zombie(std::vector<std::string> arr)
+Zombie::Zombie(GameNode node)
 {
-	this->ID = atoi(arr.at(0).c_str());
+	this->ID = node.ID;
 
-	this->ID_Image = atoi(arr.at(1).c_str());
+	this->ID_Image = node.IDIMAGE;
 
 	this->_isAnimation = true;
 
-	this->setContainSize(atoi(arr.at(2).c_str()),atoi(arr.at(3).c_str()));
+	this->setContainSize(node.CONTAINSIZE);
 
 
-	this->setPosition(100, 100);
+	this->setPosition(node.POSITION);
 
 	this->isMove = false;
 
@@ -87,7 +87,8 @@ Zombie::Zombie(std::vector<std::string> arr)
 
 		listRect.push_back(rect);
 	}
-	
+
+
 }
 
 void Zombie::update(float dt)
@@ -136,7 +137,7 @@ void Zombie::update(float dt)
 			this->setAnimation(17,19,20,0.15);
 		}
 	}
-	if (this->getPositionY() >= 250 && zombieStatus == ZombieStatus::isOnAir)
+	if (this->getPositionY() >= 390 && zombieStatus == ZombieStatus::isOnAir)
 	{
 		//zombieStatus = ZombieStatus::isNormal;
 		this->vY = -250;
@@ -150,8 +151,9 @@ void Zombie::update(float dt)
 		if (Input::CreateInstance()->IsKeyDown(DIK_RIGHT))
 		{
 			this->_isFlipX = false;
-			this->vX = 90;
+			this->vX = 100;
 			this->isOnFoot = true;
+			this->isMove = true;
 			
 			//Right - Up
 			if (Input::CreateInstance()->IsKeyDown(DIK_UP))
@@ -181,6 +183,7 @@ void Zombie::update(float dt)
 					animationStatus = AnimationStatus::isRun;
 
 					this->setAnimation(3,4,6);
+					//this->setAnimation(6, 7, 9, 0.2);
 					
 				}
 			}
@@ -194,8 +197,10 @@ void Zombie::update(float dt)
 		else if (Input::CreateInstance()->IsKeyDown(DIK_LEFT))
 		{
 			this->_isFlipX = true;
-			this->vX = -90;
+			this->vX = -100;
 			this->isOnFoot = true;
+			this->isMove = true;
+
 
 			//Left - Up
 			if (Input::CreateInstance()->IsKeyDown(DIK_UP))
@@ -232,6 +237,8 @@ void Zombie::update(float dt)
 		else
 		{
 			this->vX = 0;
+			this->isMove = false;
+
 
 			if (Input::CreateInstance()->IsKeyDown(DIK_Z))
 			{
@@ -258,9 +265,9 @@ void Zombie::update(float dt)
 		animationStatus = AnimationStatus::isInit;
 	}
 	
-	if (this->getPositionY() < 100 && zombieStatus != ZombieStatus::islyingDown)
+	if (this->getPositionY() < 280 && zombieStatus != ZombieStatus::islyingDown)
 	{
-		this->setPositionY(100);
+		this->setPositionY(280);
 		this->vY = 0;
 		this->isJump = true;
 		this->animationStatus = AnimationStatus::isInit;
@@ -305,6 +312,31 @@ void Zombie::addBullet()
 {
 	/*Bullet* bullet = BulletFactory::CreateInstance()->create((Zombie*)this);
 	listBullet->push_back(bullet);*/
+}
+
+
+void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
+{
+	this->_box = this->getBox();
+
+	float normalX = 0;
+	float normalY = 0;
+
+	float timeCollision;
+	if (this->isMove)
+	{
+
+		for (auto objCollision : listObjectCollision)
+		{
+			timeCollision = this->getTimeCollision(objCollision, normalX, normalY, dt);
+
+			if (timeCollision == 2.0f)
+			{
+				this->setPositionX(10);
+			}
+			
+		}
+	}
 }
 
 void Zombie::draw()

@@ -4,9 +4,10 @@
 #include "Game.h"
 #include"SpriteManager.h"
 #include"TextureManager.h"
-#include"Ball.h"
 #include"Zombie.h"
 #include"Bullet.h"
+#include"BackGround.h"
+#include"HideObject.h"
 
 #pragma once
 class GameScene : public Game
@@ -24,9 +25,6 @@ public:
 
 private:
 
-	std::vector<Ball*>* listBall;
-
-	Ball* ball;
 	
 	RECT screen;
 
@@ -37,6 +35,10 @@ private:
 	bool isFile;
 
 	float currentTime;
+
+	BackGround* bg;
+
+	std::vector<HideObject*> listHideObject;
 };
 
 #endif

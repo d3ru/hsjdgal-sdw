@@ -7,23 +7,26 @@ ObjectGame::ObjectGame()
 ObjectGame::~ObjectGame()
 {}
 
-ObjectGame::ObjectGame(std::vector<std::string> arr)
+ObjectGame::ObjectGame(GameNode node)
 {}
 
-RECT ObjectGame::getRect()
-{
-	_rect.top = this->getPosition().y + _containtSize.height / 2;
-	_rect.bottom = _rect.top - _containtSize.height;
-	_rect.left = this->getPosition().x - _containtSize.width / 2;
-	_rect.right = _rect.left + _containtSize.width;
-
-	return _rect;
-}
 
 void ObjectGame::setContainSize(float width, float height)
 {
 	_containtSize.width = width;
 	_containtSize.height = height;
+}
+
+void ObjectGame::setContainSize(Size Size)
+{
+	setContainSize(Size.width, Size.height);
+}
+
+Box ObjectGame::getBox()
+{
+	_box = Box(_position.x, _position.y, _containtSize.width, _containtSize.height);
+
+	return _box;
 }
 
 Size ObjectGame::getContainSize()

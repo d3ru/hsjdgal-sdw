@@ -7,8 +7,8 @@
 
 #define ClassName "Contra"
 
-#define Screen_Width 800
-#define Screen_Height 600
+#define Screen_Width 600
+#define Screen_Height 448
 #define Frame_Rate 60
 #define KEYBOARD_BUFFER_SIZE 256
 

@@ -17,16 +17,16 @@ void  Sprite::draw(Texture* image, RECT *RectRS, D3DXVECTOR3 pos, D3DCOLOR trans
 	{
 		D3DXVECTOR3* center = nullptr;
 		if (RectRS == nullptr)
-		{
-			center = nullptr;
-		}
+			{
+				center = nullptr;
+			}
 		else
-		{
-			center = new D3DXVECTOR3(
-				(RectRS->right - RectRS->left) / 2.0f,
-				(RectRS->bottom - RectRS->top) / 2.0f,
-				0);
-		}
+			{
+				center = new D3DXVECTOR3(
+					(RectRS->right - RectRS->left) / 2.0f,
+					(RectRS->bottom - RectRS->top) / 2.0f,
+					0);
+			}
 		this->_SpriteHandler->Draw(image->getTexture(), RectRS, center, &pos, transcolor);
 		delete center;
 	}

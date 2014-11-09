@@ -22,7 +22,15 @@ void ObjectFactory::addInfo(std::vector<std::string> arr)
 	
 	this->info.push_back(arr);
 
-	int i = 2;
+}
+
+void ObjectFactory::addInfo(std::vector<GameNode> arr)
+{
+	for (auto _node : arr)
+	{
+		this->listInfo.push_back(_node);
+	}
+
 }
 
 std::vector<std::string> ObjectFactory::getInfoById(int ID)
