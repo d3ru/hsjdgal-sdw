@@ -11,5 +11,5 @@ ZombieFactory* ZombieFactory::createInstance()
 
 Zombie* ZombieFactory::create()
 {
-	return Zombie::createInstance(info.at(0));
+	return Zombie::createInstance(listInfo.at(0));
 }

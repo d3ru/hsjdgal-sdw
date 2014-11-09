@@ -1,10 +1,11 @@
 #ifndef __ZOMBIE__H__
 #define __ZOMBIE__H__
 
-#include"ObjectGame.h"
+#include"DynamicObject.h"
 #include"Animation.h"
 #include"Zombie.h"
-
+#include"GameNode.h"
+#include"HideObject.h"
 
 #pragma once
 
@@ -27,17 +28,18 @@ enum class AnimationStatus
 	isFireDown,
 };
 
-class Zombie : public ObjectGame, public Animation 
+class Zombie : public DynamicObject, public Animation 
 {
 public:
+	
 
-	static Zombie* createInstance(std::vector<std::string>);
+	static Zombie* createInstance(GameNode);
 
 	static Zombie* getInstance();
 
 	Zombie();
 	
-	Zombie(std::vector<std::string>);
+	Zombie(GameNode);
 
 	void update(float dt);
 
@@ -50,10 +52,12 @@ public:
 
 	AnimationStatus animationStatus;
 
-	float vX;
-	float vY;
+
+	void collision(float, std::vector<HideObject*>);
 
 private:
+
+	
 
 	bool isJump;
 	

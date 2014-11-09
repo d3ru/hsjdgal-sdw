@@ -1,8 +1,10 @@
 #include "GameScene.h"
 #include "FileUtils.h"
-#include "BallFactory.h"
 #include"ZombieFactory.h"
 #include"BulletFactory.h"
+#include"HideObjectFactory.h"
+#include"BackGround.h"
+#include"config.h"
 
 
 GameScene::GameScene()
@@ -12,10 +14,7 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-	if (ball)
-		delete ball;
-	if (listBall)
-		delete listBall;
+
 	if (zombie)
 		delete zombie;
 	if (listBullet)
@@ -32,19 +31,20 @@ void GameScene::gameInit()
 	FileUtils::getInstance()->loadFileCSV();
 	
 	
-	listBall = BallFactory::getInstance()->createListBall();
+	
 	
 	RECT _rect;
 	_rect.left = 0;
-	_rect.right = 1200;
-	_rect.top = 600;
+	_rect.right = 6656 - Screen_Height / 2;
+	_rect.top = 440;
 	_rect.bottom = 0;
 
 	SpriteManager::createInstance()->camera->setBound(_rect);
 
-	screen = SpriteManager::createInstance()->camera->getScreen();
+	
+	//screen = SpriteManager::createInstance()->camera->getScreen();
 
-	ball = BallFactory::getInstance()->createObj();
+	listHideObject = HideObjectFactory::createInstance()->create();
 
 	zombie = ZombieFactory::createInstance()->create();
 
@@ -52,6 +52,10 @@ void GameScene::gameInit()
 
 	isFile = true;
 
+
+	bg = new BackGround();
+	bg->readData("..\\Resource\\map\\TileMap01.txt");
+	//bg = BackGround::createInstance()->readData("..\\Resource\\map\\TileMap01.txt");
 	
 }
 
@@ -87,21 +91,27 @@ void GameScene::gameUpdate(float dt)
 		listBullet->push_back(bullet);
 		currentTime = 0;
 	}
+
+	//
+	screen = SpriteManager::createInstance()->camera->getViewPortScreen();
+	bg->checkTileInBound(screen);
 	
 
-	ball->update(dt);
-
-	//pall->update();
+	
 
 	zombie->update(dt);
+	zombie->collision(dt, listHideObject);
 
 	SpriteManager::createInstance()->updateCamera(Zombie::getInstance()->getPositionX(), dt);
 
+	
 	if (listBullet)
 	{
 		for (auto _bullet : *listBullet)
 		{
 			_bullet->update(dt);
+
+			
 		}
 	}
 
@@ -109,12 +119,10 @@ void GameScene::gameUpdate(float dt)
 
 void GameScene::gameDraw()
 {
-	/*for (auto _ball : *listBall)
-	{
-		_ball->draw();
-	}*/
-	ball->draw();
-	//pall->draw();
+	
+	
+	bg->drawBackGround();
+
 	zombie->draw();
 	if (listBullet)
 	{

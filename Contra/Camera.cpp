@@ -28,7 +28,7 @@ void Camera::setBound(RECT rect)
 	this->_boundScene = rect;
 }
 
-RECT Camera::getScreen()
+RECT Camera::getViewPortScreen()
 {
 	RECT rect;
 
@@ -56,11 +56,11 @@ D3DXVECTOR3 Camera::getPointTransform(float x, float y)
 
 void Camera::update(float XX, float dt)
 {
-	if (!donePrepare)
+	//if (!donePrepare)
 	{
 		float xTarget = XX - Screen_Width / 2;
 
-		if (!stopScrollScreen)
+		//if (!stopScrollScreen)
 		{
 			_position.x = (int)xTarget;
 

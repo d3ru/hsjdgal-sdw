@@ -28,7 +28,7 @@ public:
 
 	D3DXVECTOR3 getPointTransform(float x, float y);
 
-	RECT getScreen();
+	RECT getViewPortScreen();
 
 private:
 

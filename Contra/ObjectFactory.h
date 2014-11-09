@@ -3,12 +3,15 @@
 
 #include<vector>
 #include"ObjectGame.h"
+#include"GameNode.h"
 
 class ObjectFactory
 {
 public:
 	
 	void addInfo(std::vector<std::string>);
+
+	void addInfo(std::vector<GameNode>);
 
 	virtual ObjectGame* createObj();
 
@@ -22,5 +25,6 @@ protected:
 
 	std::vector<std::vector<std::string>> info;
 	
+	std::vector<GameNode> listInfo;
 };
 #endif

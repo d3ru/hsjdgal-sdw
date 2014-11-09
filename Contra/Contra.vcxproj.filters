@@ -34,6 +34,36 @@
     <Filter Include="FrameWork\Camera">
       <UniqueIdentifier>{e8855d82-082c-44e7-bf04-3bbc98aff512}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{02e3cc77-9025-48ea-8350-c8fd0c1e1151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Background">
+      <UniqueIdentifier>{5f7c7f88-b23a-4679-a5f0-80834579fafe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Font">
+      <UniqueIdentifier>{67715536-72c6-4230-b26a-959ba384202b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Map">
+      <UniqueIdentifier>{0adc0ec7-8884-4bd1-80cf-a9f306a7e05d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\StaticObject">
+      <UniqueIdentifier>{c3398f03-f833-4170-8c27-db5f9da5e3e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\DynamicObject">
+      <UniqueIdentifier>{54be3556-cdd3-4860-9380-a27b17569caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\StaticObject\HideObject">
+      <UniqueIdentifier>{fa814ea7-424d-45ec-9e87-dbbfe825117a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\DynamicObject\Rambo">
+      <UniqueIdentifier>{1d56c94f-bec0-4819-9471-86d4b4251f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\GameNode">
+      <UniqueIdentifier>{5fa37558-f3bc-447e-82e1-79b35542206a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factory\HideObject">
+      <UniqueIdentifier>{1ec33c8b-6a37-4457-9fcf-b6415aff2e72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -54,9 +84,6 @@
     <ClCompile Include="ObjectGame.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="FileUtils.cpp">
-      <Filter>Factory\FileUtils</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectFactory.cpp">
       <Filter>Factory</Filter>
     </ClCompile>
@@ -75,17 +102,8 @@
     <ClCompile Include="Point.cpp">
       <Filter>FrameWork\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Zombie.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="BallFactory.cpp">
-      <Filter>Factory</Filter>
     </ClCompile>
     <ClCompile Include="BulletFactory.cpp">
       <Filter>Factory</Filter>
@@ -95,6 +113,39 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>FrameWork\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Map\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Map\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>FrameWork\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="HideObject.cpp">
+      <Filter>Object\StaticObject\HideObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Object\DynamicObject\Rambo</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>Object\GameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Object\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtils.cpp">
+      <Filter>Factory\FileUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicObject.cpp">
+      <Filter>Object\DynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="HideObjectFactory.cpp">
+      <Filter>Factory\HideObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,17 +188,8 @@
     <ClInclude Include="ObjectFactory.h">
       <Filter>Factory</Filter>
     </ClInclude>
-    <ClInclude Include="Zombie.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Ball.h">
-      <Filter>Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="BallFactory.h">
-      <Filter>Factory</Filter>
     </ClInclude>
     <ClInclude Include="BulletFactory.h">
       <Filter>Factory</Filter>
@@ -157,6 +199,36 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>FrameWork\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>Map\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Map\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>FrameWork\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="HideObject.h">
+      <Filter>Object\StaticObject\HideObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Object\DynamicObject\Rambo</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>Object\GameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Object\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicObject.h">
+      <Filter>Object\DynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="HideObjectFactory.h">
+      <Filter>Factory\HideObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

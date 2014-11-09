@@ -52,8 +52,8 @@ void SpriteManager::drawObj(ObjectGame* gameObject, D3DCOLOR transcolor)
 	{
 		rectRS->left = 0;
 		rectRS->top = 0;
-		rectRS->right = rectRS->left + gameObject->getContainSize().width;
-		rectRS->bottom = rectRS->right + gameObject->getContainSize().height;
+		rectRS->right = rectRS->left + texture->getContainSize().width;
+		rectRS->bottom = rectRS->right + texture->getContainSize().height;
 
 		gameObject->setContainSize(texture->getContainSize().width, texture->getContainSize().height);
 	}

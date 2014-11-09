@@ -7,7 +7,8 @@
 #include<d3dx9.h>
 #include"Point.h"
 #include<vector>
-
+#include"Collision.h"
+#include"GameNode.h"
 
 class ObjectGame
 {
@@ -21,13 +22,8 @@ public:
 
 	RECT* _rectRS;
 
-	RECT _rect;
-
 	bool _isAnimation = false;
 
-	Size _containtSize;
-
-	RECT getRect();
 
 	Size getContainSize();
 
@@ -36,6 +32,8 @@ public:
 	float getZOther();
 
 	void setContainSize(float, float);
+
+	void setContainSize(Size);
 
 	void setPosition(float , float);
 
@@ -54,13 +52,19 @@ public:
 	ObjectGame();
 	~ObjectGame();
 
-	ObjectGame(std::vector<std::string> );
+	ObjectGame(GameNode);
 
 	virtual void update(float);
 
+	virtual Box getBox();
+
 protected:
 
+	Box _box;
+
 	float _zOther;
+
+	Size _containtSize;
 
 	D3DXVECTOR2 _position;
 
