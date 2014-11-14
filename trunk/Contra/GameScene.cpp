@@ -120,7 +120,8 @@ void GameScene::gameUpdate(float dt)
 void GameScene::gameDraw()
 {
 	
-	
+	zombie->drawBoundingBox(_d3ddv, zombie->getBox());
+
 	bg->drawBackGround();
 
 	zombie->draw();
@@ -132,7 +133,12 @@ void GameScene::gameDraw()
 		}
 	}
 
-}
+	for (auto hideObject : listHideObject)
+	{
+		hideObject->drawBoundingBox(_d3ddv,hideObject->getBox());
+	}
+
+	}
 
 void GameScene::clearScreen()
 {

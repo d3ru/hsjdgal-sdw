@@ -21,6 +21,8 @@ public:
 	void draw(Texture* image, RECT *RectRS, D3DXVECTOR3 pos, D3DXVECTOR2 scale, D3DCOLOR transcolor = 0xFFFFFFFF, bool isCenter = true);
 
 	void drawFlipX(Texture* image, RECT *RectRS, D3DXVECTOR3 pos, D3DCOLOR transcolor = 0xFFFFFFFF, bool isCenter = true);
+
+	void drawLine(LPDIRECT3DDEVICE9, Point, Point);
 };
 
 #endif

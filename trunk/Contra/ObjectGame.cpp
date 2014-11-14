@@ -1,5 +1,5 @@
 #include "ObjectGame.h"
-
+#include "SpriteManager.h"
 
 ObjectGame::ObjectGame()
 {}
@@ -24,7 +24,7 @@ void ObjectGame::setContainSize(Size Size)
 
 Box ObjectGame::getBox()
 {
-	_box = Box(_position.x, _position.y, _containtSize.width, _containtSize.height);
+	_box = Box(_position.x, _position.y, _containtSize.width, _containtSize.height, this->vX, this->vY);
 
 	return _box;
 }
@@ -82,4 +82,13 @@ void ObjectGame::setZOther(float Z)
 float ObjectGame::getZOther()
 {
 	return _zOther;
+}
+
+void ObjectGame::drawBoundingBox(LPDIRECT3DDEVICE9 _d3ddv, Box box)
+{
+	SpriteManager::createInstance()->drawLine(_d3ddv, Point(box.x - box.w / 2, box.y + box.h / 2), Point(box.x - box.w /2, box.y - box.h / 2));
+	SpriteManager::createInstance()->drawLine(_d3ddv, Point(box.x + box.w / 2, box.y + box.h / 2), Point(box.x + box.w / 2, box.y - box.h / 2));
+	SpriteManager::createInstance()->drawLine(_d3ddv, Point(box.x - box.w /2, box.y + box.h / 2), Point(box.x + box.w /2, box.y + box.h / 2));
+	SpriteManager::createInstance()->drawLine(_d3ddv, Point(box.x - box.w / 2, box.y - box.h / 2), Point(box.x + box.w / 2, box.y - box.h / 2));
+
 }

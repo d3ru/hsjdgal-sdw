@@ -31,6 +31,8 @@ Zombie::Zombie(GameNode node)
 
 	this->_isAnimation = true;
 
+	this->_isFlipX = true;
+
 	this->setContainSize(node.CONTAINSIZE);
 
 
@@ -42,9 +44,11 @@ Zombie::Zombie(GameNode node)
 
 	this->isOnFoot = false;
 
-	this->vX = 90.0f;
+	this->vX = 10.0f;
 
 	this->vY = 0;
+
+	this->detalA = 0;
 
 	this->setZOther(1);
 
@@ -265,15 +269,16 @@ void Zombie::update(float dt)
 		animationStatus = AnimationStatus::isInit;
 	}
 	
-	if (this->getPositionY() < 280 && zombieStatus != ZombieStatus::islyingDown)
+	/*if (this->getPositionY() < 280 && zombieStatus != ZombieStatus::islyingDown)
 	{
 		this->setPositionY(280);
 		this->vY = 0;
 		this->isJump = true;
 		this->animationStatus = AnimationStatus::isInit;
 		zombieStatus = ZombieStatus::isNormal;
-	}
+	}*/
 	
+	this->vY -= this->detalA;
 	this->setPosition(this->getPositionX() + this->vX * dt, this->getPositionY() + this->vY * dt);
 
 	
@@ -305,7 +310,7 @@ void Zombie::updateRECT()
 
 
 }
-
+ 
 
 
 void Zombie::addBullet()
@@ -323,18 +328,64 @@ void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
 	float normalY = 0;
 
 	float timeCollision;
-	if (this->isMove)
+	//if (this->isMove)
 	{
 
+		
 		for (auto objCollision : listObjectCollision)
 		{
 			timeCollision = this->getTimeCollision(objCollision, normalX, normalY, dt);
 
 			if (timeCollision == 2.0f)
 			{
-				this->setPositionX(10);
+				this->setPositionX(this->getPositionX() + normalX);
+				this->setPositionY(this->getPositionY() + normalY);
+				this->detalA = 0;
+				int yy = (int)this->getPositionY();
+				this->vY = 0;
+
+				this->isJump = true;
+				//this->animationStatus = AnimationStatus::isInit;
+				zombieStatus = ZombieStatus::isNormal;
+
+				if (normalY == 1 || normalY == -1)
+				{
+					int j = 8;
+				}
+
+
+				if (normalX == 1 || normalX == -1)
+				{
+					int k = 9;
+				}
+
 			}
-			
+			 
+			if (timeCollision < 1.0f)
+			{
+				 if (normalX == 1 || normalX == -1)
+				 {
+					 int k = 9;
+				 }
+				 //this->setPositionX(this->getPositionX() + normalX);
+
+				 if (normalY == 1)
+				 {
+					 int j = 8;
+				 }
+			}
+			else if (timeCollision == 1.0)
+			{
+				
+				int b = 3;
+				this->detalA = 20;
+			}
+
+			if (this->getPositionX() <= 0)
+			{
+				int f = 7;
+			}
+
 		}
 	}
 }

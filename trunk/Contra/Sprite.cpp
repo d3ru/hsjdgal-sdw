@@ -85,3 +85,17 @@ void Sprite::drawFlipX(Texture* image, RECT *RectRS, D3DXVECTOR3 pos, D3DCOLOR t
 	D3DXVECTOR2 scaling = D3DXVECTOR2(-1, 1);
 	this->draw(image, RectRS, pos, scaling, transcolor, isCenter);
 }
+
+void Sprite::drawLine(LPDIRECT3DDEVICE9 _d3ddv,Point startPosition, Point endPostion)
+{
+	
+	LPD3DXLINE line;
+	D3DXVECTOR2 lines[] = { D3DXVECTOR2(startPosition.x, startPosition.y), D3DXVECTOR2(endPostion.x, endPostion.y) };
+
+	D3DXCreateLine(_d3ddv, &line);
+	line->Begin();
+	line->Draw(lines, 2, 0xFFFFFFFF);
+	line->End();
+	line->Release();
+
+}
