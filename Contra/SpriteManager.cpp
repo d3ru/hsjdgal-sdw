@@ -68,6 +68,16 @@ void SpriteManager::drawObj(ObjectGame* gameObject, D3DCOLOR transcolor)
 	}
 }
 
+void  SpriteManager::drawLine(LPDIRECT3DDEVICE9 _d3ddv, Point startPosition, Point endPostion)
+{
+	D3DXVECTOR3 posDrawBegin(camera->getPointTransform(startPosition.x, startPosition.y));
+	D3DXVECTOR3 posDrawEnd(camera->getPointTransform(endPostion.x, endPostion.y));
+
+	sprite->drawLine(_d3ddv, Point(posDrawBegin.x, posDrawBegin.y), Point(posDrawEnd.x, posDrawEnd.y));
+
+
+}
+
 void SpriteManager::updateCamera(float posRambo, float dt)
 {
 	camera->update(posRambo, dt);

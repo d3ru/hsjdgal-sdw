@@ -11,10 +11,7 @@ public:
 	DynamicObject();
 	~DynamicObject();
 
-	float vX;
-
-	float vY;
-
+	
 	DynamicObject(GameNode);
 
 	float getTimeCollision(ObjectGame*,float&, float&, float);

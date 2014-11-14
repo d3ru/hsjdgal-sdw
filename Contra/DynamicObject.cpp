@@ -26,7 +26,7 @@ float DynamicObject::getTimeCollision(ObjectGame* obj, float &normalx, float &no
 
 	Box broadphaseBox = Collision::getInstance()->getSweptBroadphaseBox(box, dt);
 
-	Box targetBox = Collision::getInstance()->getSweptBroadphaseBox(obj->getBox(), dt);
+	Box targetBox = obj->getBox();
 
 	float moveX = 0.0f;
 	float moveY = 0.0f;

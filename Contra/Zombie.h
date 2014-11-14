@@ -12,6 +12,8 @@
 enum class ZombieStatus
 {
 	isNormal,
+	isOnland,
+	isReset,
 	isOnAir,
 	islyingDown,
 	isUnderWater,
@@ -57,7 +59,7 @@ public:
 
 private:
 
-	
+	float detalA;
 
 	bool isJump;
 	

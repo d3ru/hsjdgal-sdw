@@ -24,6 +24,9 @@ public:
 
 	bool _isAnimation = false;
 
+	float vX;
+
+	float vY;
 
 	Size getContainSize();
 
@@ -57,6 +60,8 @@ public:
 	virtual void update(float);
 
 	virtual Box getBox();
+
+    void drawBoundingBox(LPDIRECT3DDEVICE9, Box);
 
 protected:
 

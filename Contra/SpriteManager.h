@@ -25,6 +25,7 @@ public:
 	void draw(Texture* texture, RECT *RectRS, D3DXVECTOR3 pos, D3DCOLOR transcolor = 0xFFFFFFFF);
 	void drawObj(ObjectGame*, D3DCOLOR transcolor = 0xFFFFFFFF);
 	void updateCamera(float posRambo, float dt);
+	void drawLine(LPDIRECT3DDEVICE9 _d3ddv, Point startPosition, Point endPostion);
 };
 
 #endif
