@@ -31,8 +31,6 @@ Zombie::Zombie(GameNode node)
 
 	this->_isAnimation = true;
 
-	this->_isFlipX = true;
-
 	this->setContainSize(node.CONTAINSIZE);
 
 
@@ -44,18 +42,19 @@ Zombie::Zombie(GameNode node)
 
 	this->isOnFoot = false;
 
-	this->vX = 10.0f;
+	this->vX = 0.0f;
 
 	this->vY = 0;
 
-	this->detalA = 0;
+	this->directionY = 1;
+
+	this->detalA = 20;
 
 	this->setZOther(1);
 
-	this->zombieStatus = ZombieStatus::isNormal;
 
-	this->animationStatus = AnimationStatus::isInit;
-
+	this->zombieStatus = ZOMBIESTATUS::RESET;
+	this->animationStatus = ANIMATIONSTATUS::INIT;
 
 	for (int i = 0; i < 14; i++)
 	{
@@ -92,233 +91,162 @@ Zombie::Zombie(GameNode node)
 		listRect.push_back(rect);
 	}
 
+	this->setAnimation(3,3,3);
 
 }
 
 void Zombie::update(float dt)
 {
+	
+	this->proccessKeyBoard();
+
+	//Update position of Rambo
+	this->vY -= this->detalA * this->directionY;
+	this->setPosition(this->getPositionX() + this->vX * dt, this->getPositionY() + this->vY * dt);
+
+	//Update animation of Ranbo
+	this->_rectRS = cropRect(dt);
+
+}
+
+void Zombie::proccessKeyBoard()
+{
+	//Init KeyBoard
 	Input::CreateInstance()->ProcessKeyboard();
 	Input::CreateInstance()->Update();
 
 	int isKeyDown = Input::CreateInstance()->GetKeyDown();
 	int iskeyUp = Input::CreateInstance()->GetKeyUp();
 
-	//Stand Up
-	if (iskeyUp == DIK_DOWN && zombieStatus == ZombieStatus::islyingDown)
-	{
-		zombieStatus = ZombieStatus::isNormal;
-		this->setPositionY(this->getPositionY() + 30);
-	}
+	//************************************* -QUA PHAI- *************************************//
 
-	//Laying Dowwn
-	if (Input::CreateInstance()->IsKeyDown(DIK_DOWN) && zombieStatus == ZombieStatus::isNormal  && !isOnFoot)
+	if (zombieStatus == ZOMBIESTATUS::ONLAND && Input::CreateInstance()->IsKeyDown(DIK_RIGHT))
 	{
-		zombieStatus = ZombieStatus::islyingDown;
-		this->setAnimation(14,14,14);
-		this->setPositionY(this->getPositionY() - 30);
-		
-	}
-	
-	//Fire When Lying Down
-	if (zombieStatus == ZombieStatus::islyingDown)
-	{
-		if (Input::CreateInstance()->IsKeyDown(DIK_Z) && animationStatus == AnimationStatus::isInit)
-		{
-			animationStatus = AnimationStatus::isFire;
-			this->setAnimation(14,14,16);
-		}
-	}
+		this->isMove = false;
+		this->vX = 100.0f;
+		this->_isFlipX = false;
 
-	//Jump
-	if (( zombieStatus == ZombieStatus::isNormal)&& Input::CreateInstance()->IsKeyDown(DIK_SPACE) && isJump && !isOnFoot)
-	{
-		zombieStatus = ZombieStatus::isOnAir;
-		this->vY = 300;
-		isJump = false;		
-		if (animationStatus == AnimationStatus::isInit)
+		//Di thang sang phai huong suong len tren
+		if (Input::CreateInstance()->IsKeyDown(DIK_UP))
 		{
-			animationStatus = AnimationStatus::isRotate;
-			this->setAnimation(17,19,20,0.15);
-		}
-	}
-	if (this->getPositionY() >= 390 && zombieStatus == ZombieStatus::isOnAir)
-	{
-		//zombieStatus = ZombieStatus::isNormal;
-		this->vY = -250;
-	}
-	
-	if (zombieStatus == ZombieStatus::isNormal)
-	{
-		
-#pragma region Move To Right
-
-		if (Input::CreateInstance()->IsKeyDown(DIK_RIGHT))
-		{
-			this->_isFlipX = false;
-			this->vX = 100;
-			this->isOnFoot = true;
-			this->isMove = true;
-			
-			//Right - Up
-			if (Input::CreateInstance()->IsKeyDown(DIK_UP))
+			if (animationStatus == ANIMATIONSTATUS::INIT || animationStatus == ANIMATIONSTATUS::RUN)
 			{
-				if (animationStatus == AnimationStatus::isRun || animationStatus == AnimationStatus::isInit)
-				{
-					animationStatus = AnimationStatus::isFireUp;
-					this->setAnimation(9, 9, 12);
-				}
-			}
-			//Right - Down
-			else if (Input::CreateInstance()->IsKeyDown(DIK_DOWN))
-			{
-				if (animationStatus == AnimationStatus::isRun || animationStatus == AnimationStatus::isInit)
-				{
-					animationStatus = AnimationStatus::isFireDown;
-					this->setAnimation(0, 1, 3);
-				}
+				animationStatus = ANIMATIONSTATUS::FIRE;
+				this->setAnimation(9,9,12);
 			}
 
-			//Right
-			else
-			{
-
-				if (animationStatus == AnimationStatus::isInit)
-				{
-					animationStatus = AnimationStatus::isRun;
-
-					this->setAnimation(3,4,6);
-					//this->setAnimation(6, 7, 9, 0.2);
-					
-				}
-			}
 		}
 
-#pragma endregion
-
-#pragma region Move To Left
-
-
-		else if (Input::CreateInstance()->IsKeyDown(DIK_LEFT))
+		//Di thang sangp phai huong sung xuong duoi
+		else if (Input::CreateInstance()->IsKeyDown(DIK_DOWN))
 		{
-			this->_isFlipX = true;
-			this->vX = -100;
-			this->isOnFoot = true;
-			this->isMove = true;
-
-
-			//Left - Up
-			if (Input::CreateInstance()->IsKeyDown(DIK_UP))
+			if (animationStatus == ANIMATIONSTATUS::INIT || animationStatus == ANIMATIONSTATUS::RUN)
 			{
-				if (animationStatus == AnimationStatus::isRun || animationStatus == AnimationStatus::isInit)
-				{
-					animationStatus = AnimationStatus::isFireUp;
-					this->setAnimation(9, 9, 12);
-				}
-			}
-			//Left - Down
-			else if (Input::CreateInstance()->IsKeyDown(DIK_DOWN))
-			{
-				if (animationStatus == AnimationStatus::isRun || animationStatus == AnimationStatus::isInit)
-				{
-					animationStatus = AnimationStatus::isFireDown;
-					this->setAnimation(0, 1, 3);
-				}
-			}
-			//Left
-			else
-			{
-				if (animationStatus == AnimationStatus::isInit)
-				{
-					animationStatus = AnimationStatus::isRun;
-					this->setAnimation(3, 4, 6);
-				}
+				animationStatus = ANIMATIONSTATUS::FIRE;
+				this->setAnimation(0, 1, 3);
 			}
 		}
 		
-#pragma endregion
-
-#pragma region Stand
 		else
 		{
-			this->vX = 0;
-			this->isMove = false;
-
-
-			if (Input::CreateInstance()->IsKeyDown(DIK_Z))
+			//Di thang qua phai
+			if (animationStatus == ANIMATIONSTATUS::INIT)
 			{
-				if (animationStatus == AnimationStatus::isInit)
-				{
-					animationStatus = AnimationStatus::isFire;
-					this->setAnimation(3, 3, 3);
-				}
+				animationStatus = ANIMATIONSTATUS::RUN;
+				this->setAnimation(3, 4, 6);
 			}
-			else
+		}
+	}
+
+	//************************************* -QUA TRAI- *************************************//
+
+
+	else if (zombieStatus == ZOMBIESTATUS::ONLAND && Input::CreateInstance()->IsKeyDown(DIK_LEFT))
+	{
+		this->isMove = true;
+		this->vX = -100.0f;
+		this->_isFlipX = true;
+		
+		//Di thang sang trai huong suong len tren
+		if (Input::CreateInstance()->IsKeyDown(DIK_UP))
+		{
+			if (animationStatus == ANIMATIONSTATUS::INIT || animationStatus == ANIMATIONSTATUS::RUN)
 			{
-				this->setAnimation(3, 3, 3);
-				this->isOnFoot = false;
+				animationStatus = ANIMATIONSTATUS::FIRE;
+				this->setAnimation(9, 9, 12);
+			}
+
+		}
+
+		//Di thang sangp trai huong sung xuong duoi
+		else if (Input::CreateInstance()->IsKeyDown(DIK_DOWN))
+		{
+			if (animationStatus == ANIMATIONSTATUS::INIT || animationStatus == ANIMATIONSTATUS::RUN)
+			{
+				animationStatus = ANIMATIONSTATUS::FIRE;
+				this->setAnimation(0, 1, 3);
 			}
 		}
 
-#pragma endregion
+		else
+		{
+			//Di thang qua trai
+			if (animationStatus == ANIMATIONSTATUS::INIT)
+			{
+				animationStatus = ANIMATIONSTATUS::RUN;
+				this->setAnimation(3, 4, 6);
+			}
+		}
+	}
+
+	//************************************* -DUNG YEN- *************************************//
+
+	else if (zombieStatus == ZOMBIESTATUS::ONLAND)
+	{
+		this->isMove = false;
+		this->setAnimation(3,3,3);
+		this->vX = 0.0;
 		
 	}
 
-	//On release all keys
-	if (iskeyUp == DIK_LEFT || iskeyUp == DIK_RIGHT || iskeyUp == DIK_UP || iskeyUp == DIK_DOWN || iskeyUp == DIK_Z)
+	//************************************* -NAM XUONH- *************************************//
+	if (zombieStatus == ZOMBIESTATUS::ONLAND && Input::CreateInstance()->IsKeyDown(DIK_DOWN))
 	{
-		animationStatus = AnimationStatus::isInit;
+		zombieStatus = ZOMBIESTATUS::LYINGDOWN;
+		this->vX = 0.0;
+		this->setAnimation(14,14,14);
+		this->setContainSize(82, 30);
+		this->detalA = 100;
+	
 	}
-	
-	/*if (this->getPositionY() < 280 && zombieStatus != ZombieStatus::islyingDown)
-	{
-		this->setPositionY(280);
-		this->vY = 0;
-		this->isJump = true;
-		this->animationStatus = AnimationStatus::isInit;
-		zombieStatus = ZombieStatus::isNormal;
-	}*/
-	
-	this->vY -= this->detalA;
-	this->setPosition(this->getPositionX() + this->vX * dt, this->getPositionY() + this->vY * dt);
 
-	
-	this->_rectRS = cropRect(dt);
+	//************************************* -NHAY LEN- *************************************//
+	if (zombieStatus == ZOMBIESTATUS::ONLAND && Input::CreateInstance()->IsKeyDown(DIK_SPACE) && isJump)
+	{
+		zombieStatus = ZOMBIESTATUS::ONARI;
+		this->vY = 500;
+		this->setAnimation(17, 19, 20);
+		this->setContainSize(30, 30);
+		this->isJump = false;
+
+	}
+
+
+
+	//On release all Keys
+	if (iskeyUp == DIK_LEFT || iskeyUp == DIK_RIGHT || iskeyUp == DIK_DOWN || iskeyUp == DIK_UP)
+	{
+		animationStatus = ANIMATIONSTATUS::INIT;
+
+		if (zombieStatus == ZOMBIESTATUS::LYINGDOWN)
+		{
+			zombieStatus = ZOMBIESTATUS::ONLAND;
+			this->setContainSize(30,92);
+		}
+	}
+
 	
 }
-
-void Zombie::updateRECT()
-{
-	//Stand
-	/*if (animationStatus == AnimationStatus::isInit)
-	{
-		this->setAnimation(3, 3, 3);
-	}*/
-	//Run
-	/*if (animationStatus == AnimationStatus::isRun)
-	{
-		animationStatus = AnimationStatus::isNormal;
-		index = 4;
-		lastFrame = 6;
-		firstFrame = 3;
-	}*/
-	//Up - R - L
-	/*if (animationStatus == AnimationStatus::isFireUp)
-	{
-		animationStatus = AnimationStatus::isFireDown;
-		this->setAnimation(9, 9, 12);
-	}*/
-
-
-}
- 
-
-
-void Zombie::addBullet()
-{
-	/*Bullet* bullet = BulletFactory::CreateInstance()->create((Zombie*)this);
-	listBullet->push_back(bullet);*/
-}
-
 
 void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
 {
@@ -340,14 +268,21 @@ void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
 			{
 				this->setPositionX(this->getPositionX() + normalX);
 				this->setPositionY(this->getPositionY() + normalY);
+
 				this->detalA = 0;
-				int yy = (int)this->getPositionY();
 				this->vY = 0;
 
-				this->isJump = true;
-				//this->animationStatus = AnimationStatus::isInit;
-				zombieStatus = ZombieStatus::isNormal;
+				if (zombieStatus == ZOMBIESTATUS::RESET)
+					zombieStatus = ZOMBIESTATUS::ONLAND;
+				if (zombieStatus == ZOMBIESTATUS::ONARI)
+				{
+					zombieStatus = ZOMBIESTATUS::ONLAND;
+					this->setContainSize(30,92);
+					this->isJump = true;
+				}
 
+
+				
 				if (normalY == 1 || normalY == -1)
 				{
 					int j = 8;
@@ -367,9 +302,8 @@ void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
 				 {
 					 int k = 9;
 				 }
-				 //this->setPositionX(this->getPositionX() + normalX);
-
-				 if (normalY == 1)
+				 
+				 if (normalY == 1 || normalY == -1)
 				 {
 					 int j = 8;
 				 }
@@ -381,11 +315,7 @@ void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
 				this->detalA = 20;
 			}
 
-			if (this->getPositionX() <= 0)
-			{
-				int f = 7;
-			}
-
+		
 		}
 	}
 }
@@ -393,11 +323,5 @@ void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
 void Zombie::draw()
 {
 	SpriteManager::createInstance()->drawObj(this);
-	/*if (listBullet)
-	{
-		for (auto bullet : *listBullet)
-		{
-			bullet->draw();
-		}
-	}*/
+	
 }

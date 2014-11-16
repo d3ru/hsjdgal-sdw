@@ -122,6 +122,7 @@ void GameScene::gameDraw()
 	
 	zombie->drawBoundingBox(_d3ddv, zombie->getBox());
 
+	
 	bg->drawBackGround();
 
 	zombie->draw();
