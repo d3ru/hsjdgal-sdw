@@ -9,25 +9,21 @@
 
 #pragma once
 
-enum class ZombieStatus
+enum class ZOMBIESTATUS
 {
-	isNormal,
-	isOnland,
-	isReset,
-	isOnAir,
-	islyingDown,
-	isUnderWater,
+	RESET,
+	ONLAND,
+	LYINGDOWN,
+	ONARI,
+	UNDERWATER,
 };
 
-
-enum class AnimationStatus
+enum class ANIMATIONSTATUS
 {
-	isInit,
-	isFire,
-	isRotate,
-	isRun,
-	isFireUp,
-	isFireDown,
+	INIT,
+	RUN,
+	ROTATE,
+	FIRE,
 };
 
 class Zombie : public DynamicObject, public Animation 
@@ -47,28 +43,27 @@ public:
 
 	void draw();
 
-
-	bool isMove;
-
-	ZombieStatus zombieStatus;
-
-	AnimationStatus animationStatus;
-
+	ZOMBIESTATUS zombieStatus;
+	ANIMATIONSTATUS animationStatus;
 
 	void collision(float, std::vector<HideObject*>);
 
+	bool isMove; 
+
+
 private:
 
-	float detalA;
+	float detalA; 
 
-	bool isJump;
-	
-	void updateRECT();
+	int directionY;
+
+	bool isJump;	
 
 	bool isOnFoot;
 
-	
-	void addBullet();
+	void proccessKeyBoard();
+
+
 };
 
 #endif

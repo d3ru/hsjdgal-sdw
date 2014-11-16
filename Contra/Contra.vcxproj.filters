@@ -19,9 +19,6 @@
     <Filter Include="FrameWork\Sprite">
       <UniqueIdentifier>{de16f365-c20d-4fb0-b3c5-d8c4e9183e78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{af38f969-61ab-416a-a4f8-41935df8553f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Factory\FileUtils">
       <UniqueIdentifier>{945b27cb-1eca-4266-8c6c-c66d07928d91}</UniqueIdentifier>
     </Filter>
@@ -63,6 +60,9 @@
     </Filter>
     <Filter Include="Factory\HideObject">
       <UniqueIdentifier>{1ec33c8b-6a37-4457-9fcf-b6415aff2e72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{af38f969-61ab-416a-a4f8-41935df8553f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +129,6 @@
     <ClCompile Include="HideObject.cpp">
       <Filter>Object\StaticObject\HideObject</Filter>
     </ClCompile>
-    <ClCompile Include="Zombie.cpp">
-      <Filter>Object\DynamicObject\Rambo</Filter>
-    </ClCompile>
     <ClCompile Include="GameNode.cpp">
       <Filter>Object\GameNode</Filter>
     </ClCompile>
@@ -146,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="HideObjectFactory.cpp">
       <Filter>Factory\HideObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Object\DynamicObject\Rambo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -76,12 +76,12 @@ void BackGround::readData(std::string filePath)
 void BackGround::transforMatrix(std::vector<std::string> arr, int Row)
 {
 
-	for (int i = 0; i < arr.size(); i++)
+	for (int i = 0; i < arr.size(); ++i)
 	{
 		
 		this->_matrix[i][Row].IDTile =  atoi(arr[i].c_str());
-		this->_matrix[i][Row].posTile = Point(i * _size , Screen_Height - _size * Row );
-		//listTile.push_back(_matrix[i][Row]);
+		this->_matrix[i][Row].posTile = Point(i * _size + _size , Screen_Height - _size * Row );
+	
 		
 	}
 }
@@ -102,9 +102,9 @@ RECT BackGround::getRectByID(int ID)
 
 void BackGround::checkTileInBound(RECT rect)
 {
-	for (int j = 0; j < _row; j++)
+	for (int j = 0; j < _row; ++j)
 	{
-		for (int i = 0; i < _column; i++)
+		for (int i = 0; i < _column; ++i)
 		{
 			if (_matrix[i][j].posTile.x >= rect.left  && _matrix[i][j].posTile.x - _size <= rect.right)
 				_matrix[i][j].tileStaus = TileStatus::isNormal;
@@ -118,22 +118,16 @@ void BackGround::checkTileInBound(RECT rect)
 
 void BackGround::drawBackGround()
 {
-	for (int j = 0; j < _row; j++)
+	for (int j = 0; j < _row; ++j)
 	{ 
-		for (int i = 0; i < _column; i++)
+		for (int i = 0; i < _column; ++i)
 		{
 			if (_matrix[i][j].tileStaus == TileStatus::isNormal)
 			{
-				D3DXVECTOR3 posCenter = D3DXVECTOR3(_matrix[i][j].posTile.x - _size / 2, _matrix[i][j].posTile.y - _size / 2, 0);
+				D3DXVECTOR3 posCenter = D3DXVECTOR3(_matrix[i][j].posTile.x - _size / 2	  , _matrix[i][j].posTile.y - _size / 2, 0);
 				SpriteManager::createInstance()->draw(this->_texture, &getRectByID(this->_matrix[i][j].IDTile), posCenter);
 			}
 		}
 	}
 
-	/*for (auto tile : listTile)
-	{
-		D3DXVECTOR3 posCenter = D3DXVECTOR3(tile.posTile.x - _size / 2, tile.posTile.y - _size / 2, 0);
-		SpriteManager::createInstance()->draw(this->_texture, &getRectByID(tile.IDTile), posCenter);
-	}*/
-	
 }
