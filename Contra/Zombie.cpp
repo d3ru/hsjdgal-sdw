@@ -23,6 +23,10 @@ Zombie::Zombie()
 {
 }
 
+Zombie::~Zombie()
+{
+}
+
 Zombie::Zombie(GameNode node)
 {
 	this->ID = node.ID;
@@ -224,7 +228,7 @@ void Zombie::proccessKeyBoard()
 	if (zombieStatus == ZOMBIESTATUS::ONLAND && Input::CreateInstance()->IsKeyDown(DIK_SPACE) && isJump)
 	{
 		zombieStatus = ZOMBIESTATUS::ONARI;
-		this->vY = 500;
+		this->vY = 400;
 		this->setAnimation(17, 19, 20);
 		this->setContainSize(30, 30);
 		this->isJump = false;
@@ -266,7 +270,7 @@ void Zombie::collision(float dt, std::vector<HideObject*> listObjectCollision)
 
 			if (timeCollision == 2.0f)
 			{
-				this->setPositionX(this->getPositionX() + normalX);
+				//this->setPositionX(this->getPositionX() + normalX);
 				this->setPositionY(this->getPositionY() + normalY);
 
 				this->detalA = 0;
