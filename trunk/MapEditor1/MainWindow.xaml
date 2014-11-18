@@ -1,0 +1,51 @@
+﻿<Window x:Class="MapEditor1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="800" Width="1280">
+
+    <Grid >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="Open_btn" Content="Open" FontSize="18" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Open_btn_Click" />
+                <TextBlock x:Name="posX" Grid.Row="1" Text="" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="posY" Grid.Row="1" Text="" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Button x:Name="Save_btn" Content="Save" FontSize="18" Width="80" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Save_btn_Click" Margin="60,70,60,0" />
+            </Grid>
+            
+            <Grid Grid.Row="0" Grid.Column="1">
+                <ScrollViewer BorderThickness="1" HorizontalScrollBarVisibility="Visible" Width="1062" Height="Auto" Background="Gray" >
+                    <Canvas x:Name="mapCanvas" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="mapCanvas_MouseDown" MouseMove="mapCanvas_MouseMove" MouseUp="mapCanvas_MouseUp" MouseRightButtonDown="mapCanvas_MouseRightButtonDown">
+                        <!--<ItemsControl ItemsSource="{Binding Path=listObject}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ID}" FontSize="30" Foreground="White"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>-->
+                    </Canvas>
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>
