@@ -15,4 +15,5 @@ GameNode::GameNode(int id, int idImage, Point point, Size size)
 	this->POSITION = point;
 
 	this->CONTAINSIZE = size;
+
 }

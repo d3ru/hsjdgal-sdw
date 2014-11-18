@@ -22,7 +22,6 @@ public:
 	Size CONTAINSIZE;
 
 
-
 };
 
 

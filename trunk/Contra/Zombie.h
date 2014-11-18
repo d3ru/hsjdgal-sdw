@@ -12,8 +12,10 @@
 enum class ZOMBIESTATUS
 {
 	RESET,
+	HIDE,
 	ONLAND,
 	LYINGDOWN,
+	FALLING,
 	ONARI,
 	UNDERWATER,
 };
@@ -26,6 +28,15 @@ enum class ANIMATIONSTATUS
 	FIRE,
 };
 
+enum class COLLISIONSTATUS
+{
+	NOPE,
+	GROUND,
+	SWITCH,
+	WATER,
+};
+
+
 class Zombie : public DynamicObject, public Animation 
 {
 public:
@@ -36,6 +47,7 @@ public:
 	static Zombie* getInstance();
 
 	Zombie();
+	~Zombie();
 	
 	Zombie(GameNode);
 
@@ -45,6 +57,7 @@ public:
 
 	ZOMBIESTATUS zombieStatus;
 	ANIMATIONSTATUS animationStatus;
+	COLLISIONSTATUS collisionStatus;
 
 	void collision(float, std::vector<HideObject*>);
 
@@ -52,6 +65,11 @@ public:
 
 
 private:
+
+	
+	float detalTimeSwing; // thoi gian 1 frame Rambo chuyen dong tai cho
+
+	float deltaTimeFire; // thoi gian 1 lan ban khi o duoi nuoc
 
 	float detalA; 
 
@@ -61,7 +79,7 @@ private:
 
 	bool isOnFoot;
 
-	void proccessKeyBoard();
+	void proccessKeyBoard(float dt);
 
 
 };
